@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title
+      | Grumble
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+  #body-wrapper
+    = render 'layouts/header'
+    p.notice.alert-success
+      = notice
+    p.alert
+      = alert
+    p.scrollnum
+    p.back-to-top = link_to "#" do
+      = fa_icon('arrow-circle-up 3x')
+    end
+    = yield
+    p.pagenum

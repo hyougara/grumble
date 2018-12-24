@@ -1,0 +1,6 @@
+.profile-wrapper
+  .profile
+    .profile.name
+      p = link_to current_user.name , edit_user_registration_path
+    .profile-icon
+      = image_tag 'hiyoko.png', :size =>'50x50', class:'icon'
