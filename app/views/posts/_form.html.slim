@@ -1,15 +1,15 @@
-= form_with(model: post, local: true) do |form|
-  - if post.errors.any?
-    #error_explanation
-      h2
-        = pluralize(post.errors.count, "error")
-        |  prohibited this post from being saved:
-      ul
-        - post.errors.full_messages.each do |message|
-          li
-            = message
-  .field
-    = form.label :content
-    = form.text_area :content
-  .actions
-    = form.submit '愚痴る'
+.form
+  = form_with(model: post, local: true) do |form|
+    - if post.errors.any?
+      #error_explanation
+        h2
+          = pluralize(post.errors.count, "error")
+          |  prohibited this post from being saved:
+        ul
+          - post.errors.full_messages.each do |message|
+            li
+              = message
+    .field
+      = form.text_area :content, placeholder: '愚痴を記入して！'
+    .actions
+      = form.submit '愚痴る',class:'btn'

@@ -15,8 +15,10 @@ html
     p.alert
       = alert
     p.scrollnum
-    p.back-to-top = link_to "#" do
-      = fa_icon('arrow-circle-up 3x')
+    p.back-to-top
+      = link_to "#" do
+        = fa_icon('arrow-circle-up 3x')
     end
     = yield
+    = render 'layouts/footer'
     p.pagenum

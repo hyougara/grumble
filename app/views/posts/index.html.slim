@@ -1,24 +1,39 @@
-p#notice
-  = notice
-h1 内容
-table
-  thead
-    tr
-      th 
-      th Content
-      th[colspan="3"]
-  tbody
-    - @posts.each do |post|
-      tr
-        td.unlike
-        / いいね機能追加予定 ajax
-          / - if post.likes.present?
-          /   = fa_icon 'heart lg', 'data-post_id': post.id, class:'like'
-          / - else
-          /   = fa_icon 'heart lg', 'data-post_id': post.id
-        td = post.content
-        td = link_to '詳細', post
-        td = link_to '編集', edit_post_path(post)
-        td = link_to '削除', post, method: :delete, data: { confirm: '本当に消しますか？' }
-br
-= link_to '新規投稿', new_post_path
+/ p#notice
+/   = notice
+/ h1 内容
+/ table
+/   thead
+/     tr
+/       th 
+/       th Content
+/       th[colspan="3"]
+/   tbody
+/     - @posts.each do |post|
+/       tr
+/         td.unlike
+/         / いいね機能追加予定 ajax
+/           / - if post.likes.present?
+/           /   = fa_icon 'heart lg', 'data-post_id': post.id, class:'like'
+/           / - else
+/           /   = fa_icon 'heart lg', 'data-post_id': post.id
+/         td = post.content
+/         td = link_to '詳細', post
+/         td = link_to '編集', edit_post_path(post)
+/         td = link_to '削除', post, method: :delete, data: { confirm: '本当に消しますか？' }
+/ br
+/ = link_to '新規投稿', new_post_path
+
+
+
+.content-wrapper
+  .content-title
+    h1 ぐち一覧
+  .content
+    p#notice = notice
+    - if @posts.present?
+      .content-body
+        - @posts.each do |post|
+          = render @posts
+    - else
+      = link_to "バンバン愚痴ろう！", new_post_path
+  

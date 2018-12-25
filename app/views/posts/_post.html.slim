@@ -1,0 +1,29 @@
+.content-item
+  li = post.content
+  br
+  span 投稿
+  = time_ago_in_words(post.created_at)
+  span 前
+  br
+  span 投稿者:
+  = link_to post.user.name, current_user
+
+  br
+  .content-icon
+    span.delete-icon
+      = link_to post,method: :delete, data: { confirm: '本当に削除しますか？' } do
+        i.fa.fa-trash.fa-2x
+      end
+    span.edit-icon
+      = link_to  edit_post_path(@posts) do
+        i.fa.fa-edit.fa-2x
+      end
+
+
+/ = link_to post, method: :delete,
+/                 data: {confirm: "<i class='fa fa-exclamation-circle'></i>
+/                                   本当に「#{post.content}」を削除しますか?",
+/                                 cancel: "キャンセル",
+/                                 commit: "削除"} do
+/                                 i.fa.fa-trash.fa-2x
+/                                 end

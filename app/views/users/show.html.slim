@@ -1,6 +1,17 @@
 .profile-wrapper
   .profile
-    .profile.name
+    .profile-title
+      h1 #{current_user.name}のマイページ
+    .profile-name
+      span 名前
       p = link_to current_user.name , edit_user_registration_path
     .profile-icon
-      = image_tag 'hiyoko.png', :size =>'50x50', class:'icon'
+      - if current_user.image.present? 
+        = image_tag current_user.image.thumb.url, :size => "100x100",class:'profile-icon'
+      - else 
+        =image_tag 'hiyoko.png',:size => "100x100",class:'profile-icon'
+    .profile-content
+      = @user.name
+      = @user.email
+      = current_user.image.thumb.url
+      = @user.id

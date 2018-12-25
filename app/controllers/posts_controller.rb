@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user! 
   def index
-    @posts = current_user.posts
+    @posts = current_user.posts.order(created_at: :desc)
   end
   def show
   end
@@ -17,7 +17,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
 
     if @post.save
-      redirect_to @post, notice: '作成しました'
+      redirect_to posts_path, notice: '作成しました'
     else
       render :new
     end

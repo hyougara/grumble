@@ -1,41 +1,50 @@
-h2 ユーザー編集
-/ = resource_name.to_s.humanize
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    div
-      | Currently waiting confirmation for: 
-      = resource.unconfirmed_email
-  .field
-    = f.label :password
-    i
-      |  パスワードを変更する場合
-    br
-    = f.password_field :password, autocomplete: "new-password"
-    - if @minimum_password_length
+.form
+  h2 ユーザー編集
+  / = resource_name.to_s.humanize
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+    = devise_error_messages!
+    .field
+      = f.email_field :email, autofocus: true, autocomplete: "email",placeholder: 'メールアドレス'
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      div
+        | Currently waiting confirmation for: 
+        = resource.unconfirmed_email
+    .field
+      i
+        |  パスワードを変更する場合
       br
-      em
-        = @minimum_password_length
-        |  文字以上でお願いします
-  .field
-    = f.label :password_confirmation
-    br
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .field
-    = f.label :current_password
-    i
-      | 確認用
-    br
-    = f.password_field :current_password, autocomplete: "current-password"
-  .actions
-    = f.submit "更新  "
-h3
-  | アカウント削除
-p
-  | アカウントを削除する場合 
-  = button_to "アカウント削除", registration_path(resource_name), data: { confirm: "本当に消しますか?" }, method: :delete
-= link_to "Back", :back
+      = f.password_field :password, autocomplete: "new-password",placeholder: 'パスワードを入力'
+      - if @minimum_password_length
+        br
+        em
+          = @minimum_password_length
+          |  文字以上でお願いします
+    .field
+      i
+        |  パスワードを変更した場合
+      br
+      = f.password_field :password_confirmation, autocomplete: "new-password",placeholder: '確認'
+
+    .field
+      img.avatar_img_prev
+        = link_to "#", "#",class:'hidden'
+    - if current_user.persisted? && current_user.image? 
+      = image_tag current_user.image.to_s,class:'form-profile-icon', :size => '200x200'
+      = f.label :remove_image, '削除'
+      = f.check_box :remove_image 
+    - else
+      = image_tag 'hiyoko.png',class:'form-profile-icon', :size => '200x200'
+      = f.hidden_field :image_cache
+      = f.file_field :image, class: 'post_img'
+    .field
+      i 変更した場合は入力してください
+      br
+      = f.password_field :current_password, autocomplete: "current-password",placeholder:'現在のパスワード入力' 
+    .actions
+      = f.submit "更新",class:'btn'
+  h3
+    | アカウント削除
+  p
+    | アカウントを削除する場合 
+    = button_to "アカウント削除", registration_path(resource_name),class:'btn' ,data: { confirm: "本当に消しますか?" }, method: :delete
+  = link_to "戻る", :back
