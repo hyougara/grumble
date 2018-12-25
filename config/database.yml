@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: grumble_production
-  username: grumble
-  password: <%= ENV['GRUMBLE_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
